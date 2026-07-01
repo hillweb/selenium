@@ -126,7 +126,7 @@ def parse_single_account() -> tuple[str, str]:
     accounts=os.environ.get("ACCOUNTS", "").strip()
     password=os.environ.get("PASSWORD", "").strip()
     if not accounts or not password:
-        logger.error("未设置环境变量 LUNES，请设置 LUNES=邮箱-----密码")
+        logger.error("未设置环境变量 ACCOUNTS 或 PASSWORD，请设置Secrets:PASSWORD;Variables:ACCOUNTS")
         sys.exit(1)
 
     try:
@@ -137,11 +137,11 @@ def parse_single_account() -> tuple[str, str]:
             logger.info(f"读取到账号: {mask_email(email)}")
             return email, password
         else:
-            logger.error("LUNES 中邮箱或密码为空")
+            logger.error("ACCOUNTS 中邮箱或密码为空")
             sys.exit(1)
 
     except Exception as e:
-        logger.error(f"解析 LUNES 失败: {e}")
+        logger.error(f"解析 ACCOUNTS 失败: {e}")
         sys.exit(1)
 
 
