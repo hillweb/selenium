@@ -97,7 +97,7 @@ def notify_telegram(email: str, ok: bool, msg: str = "", screenshot_file: str = 
             return
 
         status = "✅ 保活成功" if ok else "❌ 保活失败"
-        message=f"Lunes账号: {email}\n{status}. From: github-1"
+        message=f"Lunes账号: {email}\n{status}. From: github-hill"
         requests.post(tg_api, data=message.encode('utf-8'))
     except Exception as e:
         logger.warning(f"Telegram 通知失败: {e}")
