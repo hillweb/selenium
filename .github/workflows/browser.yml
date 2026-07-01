@@ -15,7 +15,7 @@ jobs:
       contents: read
       actions: write
     concurrency:
-      group: lunes-keepalive
+      group: browser-login
       cancel-in-progress: false
 
     steps:
