@@ -69,7 +69,7 @@ jobs:
           ACCOUNTS: ${{ vars.ACCOUNTS }}
           PASSWORD: ${{ secrets.PASSWORD }}
           TG_API: ${{ vars.TG_API }}
-        run: python scripts/Lunes-Keep.py
+        run: python browser.py
 
 
       # - name: 上传截图 
