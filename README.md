@@ -2,8 +2,8 @@
 selenium Browser 
 
 ## 无头浏览器登录脚本
-需要设置的变量
-Settings-->Secrets and variables--->actions--->
+> 需要设置的变量  
+> Settings-->Secrets and variables--->actions--->
 - Secrets
   - PASSWORD  [必填：设置账号的密码]
 - Variables
