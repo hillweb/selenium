@@ -1,7 +1,7 @@
 # selenium
 selenium Browser 
 
-## 无头浏览器登录脚本【以Lunes为例】
+## 无头浏览器登录脚本【以Lunes为例：含Cloudflare验证】
 > 需要设置的变量
 > 
 > Settings-->Secrets and variables--->actions--->
