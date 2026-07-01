@@ -11,7 +11,9 @@ selenium Browser
   - ACCOUNTS  [**必填**：账号清单，逗号`,`间隔]
   - HY2_URL   [可选：Hysteria2代理连接]
   - TG_API    [可选：tg自定义接口]
- 
+
+> 使用Variables方便后期查看相关信息；便于修改。
+
 > `HY2_URL` :正常使用hysteria2节点链接
 ```
 hyteria2://UUID@IP:PORT?sni=www.bing.com
