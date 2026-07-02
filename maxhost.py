@@ -16,7 +16,7 @@ from seleniumbase import SB
 from seleniumbase.common.exceptions import TimeoutException
 
 # ================== 配置 ==================
-BETADASH_LOGIN_URL = "https://betadash.lunes.host/login"
+BETADASH_LOGIN_URL = "https://panel.maxhost.fit/auth/login"
 OUTPUT_DIR = Path("output/screenshots")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 Allow_screenshot=False
@@ -97,7 +97,7 @@ def notify_telegram(email: str, ok: bool, msg: str = "", screenshot_file: str = 
             return
 
         status = "✅ 保活成功" if ok else "❌ 保活失败"
-        message=f"Lunes账号: {email}\n{status}. From: github-hill"
+        message=f"Maxhost账号: {email}\n{status}. From: github-hill"
         requests.post(tg_api, data=message.encode('utf-8'))
     except Exception as e:
         logger.warning(f"Telegram 通知失败: {e}")
@@ -125,6 +125,7 @@ def check_and_exit_on_rate_limit(sb, email: str) -> None:
 def parse_single_account() -> tuple[str, str]:
     accounts=os.environ.get("ACCOUNTS", "").strip()
     password=os.environ.get("PASSWORD", "").strip()
+    return 'andrew@ggmail.cloudns.be',password
     if not accounts or not password:
         logger.error("未设置环境变量 ACCOUNTS 或 PASSWORD，请设置Secrets:PASSWORD;Variables:ACCOUNTS")
         sys.exit(1)
