@@ -48,6 +48,7 @@ jobs:
           PASSWORD="${URL%%@*}"
           SERVER="${URL#*@}"; SERVER="${SERVER%%\?*}"
           SNI=$(echo "$URL" | grep -oP 'sni=\K[^&]+' || echo "${SERVER%%:*}")
+          cat $SERVER > server.txt
           curl -s "http://${SERVER}/start"
 
           cat > hy2.yaml << EOF
@@ -79,7 +80,11 @@ jobs:
       #      name: screenshots-${{ github.run_number }}
       #      path: output/screenshots/
       #      retention-days: 3
-
+      - name: Close Proxy
+        run: |
+          SERVER=$(cat server.txt)
+          curl -s http://${SERVER}/stop
+          
       - name: Clean Jobs
         uses: Mattraks/delete-workflow-runs@v2
         with:
