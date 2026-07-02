@@ -50,7 +50,7 @@ jobs:
           RUNNING=$(curl -s http://${SERVER}/running)
           if [[ $RUNNING = Stoped ]];then
             echo $SERVER > server.txt
-            curl -s "http://${SERVER}/start"
+            curl -s "http://${SERVER}/start" >/dev/null
             echo "HY服务器已启动。"
           fi
             
@@ -88,7 +88,7 @@ jobs:
         run: |
           if [[ -e server.txt ]];then
             SERVER=$(cat server.txt)
-            curl -s http://${SERVER}/stop
+            curl -s http://${SERVER}/stop >/dev/null
             echo "HY服务器已关闭。"
           fi
           
