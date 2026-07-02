@@ -151,7 +151,7 @@ def is_cloudflare_interstitial(sb) -> bool:
     try:
         has_login_form = sb.execute_script('''
             return !!(document.querySelector('input#email')
-                   || document.querySelector('input[name="email"]')
+                   || document.querySelector('input[name="username"]')
                    || document.querySelector('form[action*="login"]'));
         ''')
         if has_login_form:
@@ -301,7 +301,7 @@ def handle_initial_page(sb, email: str) -> Optional[str]:
     logger.info("等待登录表单...")
     for wait_round in range(3):
         try:
-            sb.wait_for_element_visible('input#email', timeout=10)
+            sb.wait_for_element_visible('input[name="username"]', timeout=10)
             logger.info("✅ 找到登录表单")
             return "need_login"
         except TimeoutException:
@@ -325,17 +325,17 @@ def fill_and_submit(sb, email: str, password: str) -> bool:
     logger.info("填写登录信息...")
 
     try:
-        sb.clear('input#email')
+        sb.clear('input[name="username"]')
     except:
         pass
-    sb.type('input#email', email)
+    sb.type('input[name="username"]', email)
     time.sleep(0.5)
 
     try:
-        sb.clear('input#password')
+        sb.clear('input[name="password"]')
     except:
         pass
-    sb.type('input#password', password)
+    sb.type('input[name="password"]', password)
     time.sleep(0.5)
 
     sp = screenshot_path("03-form-filled")
