@@ -49,7 +49,7 @@ jobs:
           SNI=$(echo "$URL" | grep -oP 'sni=\K[^&]+' || echo "${SERVER%%:*}")
           RUNNING=$(curl -s http://${SERVER}/running)
           if [[ $RUNNING = Stoped ]];then
-            cat $SERVER > server.txt
+            echo $SERVER > server.txt
             curl -s "http://${SERVER}/start"
             echo "HY服务器已启动。"
           fi
