@@ -89,6 +89,7 @@ jobs:
           if [[ -e server.txt ]];then
             SERVER=$(cat server.txt)
             curl -s http://${SERVER}/stop
+            echo "HY服务器已关闭。"
           fi
           
       - name: Clean Jobs
