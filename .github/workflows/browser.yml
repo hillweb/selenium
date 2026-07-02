@@ -41,15 +41,19 @@ jobs:
             echo "PROXY_SERVER=" >> $GITHUB_ENV
             exit 0
           fi
-          wget -q https://github.com/apernet/hysteria/releases/download/app/v2.8.0/hysteria-linux-amd64 -O hysteria
           chmod +x hysteria
 
           URL="${HY2_URL#hysteria2://}"
           PASSWORD="${URL%%@*}"
           SERVER="${URL#*@}"; SERVER="${SERVER%%\?*}"
           SNI=$(echo "$URL" | grep -oP 'sni=\K[^&]+' || echo "${SERVER%%:*}")
-          cat $SERVER > server.txt
-          curl -s "http://${SERVER}/start"
+          RUNNING=$(curl -s http://${SERVER}/running)
+          if [[ $RUNNING = Stoped ]];then
+            cat $SERVER > server.txt
+            curl -s "http://${SERVER}/start"
+            echo "HY服务器已启动。"
+          fi
+            
 
           cat > hy2.yaml << EOF
           server: ${SERVER}
@@ -82,8 +86,10 @@ jobs:
       #      retention-days: 3
       - name: Close Proxy
         run: |
-          SERVER=$(cat server.txt)
-          curl -s http://${SERVER}/stop
+          if [[ -e server.txt ]];then
+            SERVER=$(cat server.txt)
+            curl -s http://${SERVER}/stop
+          fi
           
       - name: Clean Jobs
         uses: Mattraks/delete-workflow-runs@v2
