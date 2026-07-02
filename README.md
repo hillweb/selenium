@@ -18,3 +18,13 @@ selenium Browser
 ```
 hyteria2://UUID@IP:PORT?sni=www.bing.com
 ```
+
+> 附注：  hy服务器自定义api接口
+```bash
+# 启动hysteria2服务
+http://IP:PORT/start
+# 关闭hysteria2服务
+http://IP:PORT/stop
+# 查看运行状态
+http://IP:PORT/running
+```
