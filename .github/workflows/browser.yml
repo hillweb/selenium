@@ -78,8 +78,9 @@ jobs:
       #      path: output/screenshots/
       #      retention-days: 3
       - name: Set UpdateTime Tag
-        uses: actions/checkout@v4
-      - run: date > update/date.txt
+        run: |
+          echo "DATE_TAG=$(date +'%F.%T').txt" >> $GITHUB_ENV
+          date > upload/update.txt
           
       - name: 自动提交文件到仓库的 upload 目录
         uses: stefanzweifel/git-auto-commit-action@v5
