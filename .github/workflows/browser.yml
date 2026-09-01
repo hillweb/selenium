@@ -79,9 +79,7 @@ jobs:
       #      retention-days: 3
 
 
-      - name: Keeplive Workflow
-        uses: gautamkrishnar/keepalive-workflow@v2
-        
+
       - name: Clean Jobs
         uses: Mattraks/delete-workflow-runs@v2
         with:
