@@ -24,11 +24,11 @@ jobs:
     # 请确保你的脚本此时将截图生成到了 upload/ 目录下
     # 如果脚本无法修改路径，可以在这里加一行：run: mkdir -p upload && cp -r output/screenshots/* upload/
 
-    - name: 自动提交截图到仓库的 upload 目录
+    - name: 自动提交文件到仓库的 upload 目录
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         # 提交时的信息，[skip ci] 可以防止机器人提交代码后再次触发工作流
-        commit_message: "chore: 自动化更新截图到 upload 目录 [skip ci]"
+        commit_message: "chore: 自动化更新文件到 upload 目录 [skip ci]"
         
         # 指定只提交 upload 文件夹下的内容
         file_pattern: 'upload/*'
