@@ -71,12 +71,11 @@ jobs:
 
 
       - name: Upload Test Images
-        uses: actions/upload-artifact@v4
-        if: always()
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-           name: screenshots-${{ github.run_number }}
-           path: output/screenshots/
-           retention-days: 3
+           commit_message: screenshots-${{ github.run_number }}
+           path: output/screenshots/screenshots-${{ github.run_number }}
+           skip_dirty_check: false 
 
           
       - name: Clean Jobs
