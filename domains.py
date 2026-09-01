@@ -16,7 +16,7 @@ from seleniumbase import SB
 from seleniumbase.common.exceptions import TimeoutException
 
 # ================== 配置 ==================
-BETADASH_LOGIN_URL = "https://panel.maxhost.fit/auth/login"
+BETADASH_LOGIN_URL = "https://dashboard.digitalplat.org/auth/login"
 OUTPUT_DIR = Path("output/screenshots")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 Allow_screenshot=False
