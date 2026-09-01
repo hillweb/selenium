@@ -74,7 +74,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
            commit_message: screenshots-${{ github.run_number }}
-           path: output/screenshots/screenshots-${{ github.run_number }}
+           file_pattern: output/screenshots/*
            skip_dirty_check: false 
 
           
