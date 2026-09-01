@@ -77,21 +77,6 @@ jobs:
       #      name: screenshots-${{ github.run_number }}
       #      path: output/screenshots/
       #      retention-days: 3
-      - name: Set UpdateTime Tag
-        run: |
-          echo "DATE_TAG=$(date +'%F.%T').txt" >> $GITHUB_ENV
-          date > upload/update.txt
-          
-      - name: 自动提交文件到仓库的 upload 目录
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          # 提交时的信息，[skip ci] 可以防止机器人提交代码后再次触发工作流
-          commit_message: "更新时间提交到 upload 目录 [skip ci]"
-          # 指定只提交 upload 文件夹下的内容
-          file_pattern: 'upload/*'
-          # 如果对应的文件没有发生任何变化，自动跳过而不报错
-          skip_dirty_check: false
-
 
       - name: Clean Jobs
         uses: Mattraks/delete-workflow-runs@v2
