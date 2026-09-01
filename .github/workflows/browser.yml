@@ -70,13 +70,13 @@ jobs:
         run: python browser.py
 
 
-      # - name: Upload Test Images
-      #   uses: actions/upload-artifact@v4
-      #   if: always()
-      #   with:
-      #      name: screenshots-${{ github.run_number }}
-      #      path: output/screenshots/
-      #      retention-days: 3
+      - name: Upload Test Images
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+           name: screenshots-${{ github.run_number }}
+           path: output/screenshots/
+           retention-days: 3
 
           
       - name: Clean Jobs
