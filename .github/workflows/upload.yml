@@ -1,0 +1,37 @@
+name: 上传文件测试
+
+on:
+  schedule:
+    # 每10天运行：1号、11号、21号 中午12:12 (北京时间)
+    # UTC 时间 = 北京时间 - 8小时 = 04:12
+    - cron: '32 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    
+    # 🌟 必须添加以下权限，否则 Action 没有权限推送到你的仓库
+    permissions:
+      contents: write
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+    - run: date > upload/update.txt
+
+    # [这里是你原本运行测试/生成截图的步骤]
+    # 请确保你的脚本此时将截图生成到了 upload/ 目录下
+    # 如果脚本无法修改路径，可以在这里加一行：run: mkdir -p upload && cp -r output/screenshots/* upload/
+
+    - name: 自动提交截图到仓库的 upload 目录
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        # 提交时的信息，[skip ci] 可以防止机器人提交代码后再次触发工作流
+        commit_message: "chore: 自动化更新截图到 upload 目录 [skip ci]"
+        
+        # 指定只提交 upload 文件夹下的内容
+        file_pattern: 'upload/*'
+        
+        # 如果对应的文件没有发生任何变化，自动跳过而不报错
+        skip_dirty_check: false
