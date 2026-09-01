@@ -58,16 +58,16 @@ if __name__ == '__main__':
     print(f"共{len(expire_keys)}个账号过期")
     if len(expire_keys)>0:
         print(json.dumps(expire_accounts, ensure_ascii=False, indent=4))
-        results={}
-        for email in expire_keys:
-            results[email]={}
-            domainlist=expire_accounts[email]
-            print(f"{email} {domainlist} ")
-            # continue
-            # 执行程序domains.py
-            _result=asyncio.get_event_loop().run_until_complete(domains.login(email,domainlist))
-            results[email].update(_result[email])
-                # 更新accounts.json
-        domains.update_accounts(results)
+        # results={}
+        # for email in expire_keys:
+        #     results[email]={}
+        #     domainlist=expire_accounts[email]
+        #     print(f"{email} {domainlist} ")
+        #     # continue
+        #     # 执行程序domains.py
+        #     _result=asyncio.get_event_loop().run_until_complete(domains.login(email,domainlist))
+        #     results[email].update(_result[email])
+        #         # 更新accounts.json
+        # domains.update_accounts(results)
 
 
