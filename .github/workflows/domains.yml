@@ -1,4 +1,4 @@
-name: SeleniumBrowser
+name: DomainsRenew
 
 on:
   schedule:
