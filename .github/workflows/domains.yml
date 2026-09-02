@@ -32,6 +32,7 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           TG_API: ${{ vars.TG_API }}
         run: |
+          curl -sL https://dg.str.xx.kg?accounts.json -o accounts.json
           python domains_update.py
 
 
