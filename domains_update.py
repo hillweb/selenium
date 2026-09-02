@@ -1,7 +1,6 @@
 # 读取accounts.json文件
 import json
 from datetime import datetime
-import domains
 import asyncio
 
 def read_accounts():
