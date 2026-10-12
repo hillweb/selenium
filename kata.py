@@ -495,7 +495,7 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
     current_url = sb.get_current_url()
     logger.info(f"详情页URL: {mask_url(current_url)}")
     try:
-        let expiry_date=sb.execute_script(f'''
+        expiry_date=sb.execute_script(f'''
             var card = document.querySelector('#profile-overview');
             let content=card.innerText.split('Expiry')[1].split('\n')[1];
             return content
