@@ -490,10 +490,13 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
         sb.click(found_selector)
     except:
         try:
-            sb.execute_script(f'''
-                var card = document.querySelector('{found_selector}');
-                if (card) card.click();
+            let exp=sb.execute_script(f'''
+                var card = document.querySelector('#profile-overview');
+                # if (card) card.click();
+                let content=card.innerText.split('Expiry')[1].split('\n')[1];
+                return content
             ''')
+            logger.info(f"过期日期：{exp}");
         except:
             logger.error("无法点击服务器卡片")
             return False, "CLICK_ERROR", sp_dash
