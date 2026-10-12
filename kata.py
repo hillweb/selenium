@@ -489,22 +489,21 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
     try:
         sb.click(found_selector)
     except:
-        try:
-            let exp=sb.execute_script(f'''
-                var card = document.querySelector('#profile-overview');
-                # if (card) card.click();
-                let content=card.innerText.split('Expiry')[1].split('\n')[1];
-                return content
-            ''')
-            logger.info(f"过期日期：{exp}");
-        except:
-            logger.error("无法点击服务器卡片")
-            return False, "CLICK_ERROR", sp_dash
+        return False, "CLICK_ERROR", sp_dash
 
     time.sleep(5)
     current_url = sb.get_current_url()
     logger.info(f"详情页URL: {mask_url(current_url)}")
-
+    try:
+        let exp=sb.execute_script(f'''
+            var card = document.querySelector('#profile-overview');
+            # if (card) card.click();
+            let content=card.innerText.split('Expiry')[1].split('\n')[1];
+            return content
+        ''')
+        logger.info(f"过期日期：{exp}");
+    except:
+        logger.error("无法获取过期日期.")
     sp_detail = screenshot_path("08-server-detail")
     safe_screenshot(sb, sp_detail)
 
