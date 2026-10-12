@@ -495,11 +495,7 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
     current_url = sb.get_current_url()
     logger.info(f"详情页URL: {mask_url(current_url)}")
     try:
-        expiry_date=sb.execute_script(f'''
-            var card = document.querySelector('#profile-overview');
-            let content=card.innerText.split('Expiry')[1].split('\n')[1];
-            return content
-        ''')
+        expiry_date = sb.execute_script('return document.querySelector('#profile-overview').innerText')
         logger.info(f"过期日期：{expiry_date}");
     except:
         logger.error("无法获取过期日期.")
