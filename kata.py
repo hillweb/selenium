@@ -409,7 +409,7 @@ def fill_and_submit(sb, email: str, password: str) -> bool:
 
 
 def _extract_server_id(url: str) -> str:
-    match = re.search(r'/servers/', url)
+    match = re.search(r'/servers\/edit\?id=(\d+)', url)
     return match.group(1) if match else "Unknown"
 
 
@@ -431,7 +431,7 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
         return True, server_id, sp_dash
 
     found_selector = None
-    primary_selector = 'a.server-card'
+    primary_selector = 'div.table-responsive a'
     alt_selectors = [
         'a[href*="/servers/"]',
         '.server-card',
