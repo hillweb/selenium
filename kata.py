@@ -500,13 +500,15 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
         exp_date=expiry_date.split('Expiry')[1].split('\n')[1]
         logger.info(f"过期日期：{exp_date}")
         try:
+            logger.info("点击 Renew 按钮.")
             sb.click('button[data-bs-target="#renew-modal"]')
             sb.wait_for_element_visible('div.modal-footer > button[type="submit"]', timeout=5)
             sb.click('div.modal-footer > button[type="submit"]')
+            logger.info("正在更新...")
             sb.wait_for_element_visible('#profile-overview', timeout=15)
             expiry_date = sb.get_text("#profile-overview")
             exp_date=expiry_date.split('Expiry')[1].split('\n')[1]
-            logger.info(f"过期日期：{exp_date}")
+            logger.info(f"更新后日期：{exp_date}")
         except  Exception as e:
             logger.error(f'无法点击更新按钮.\n{e}')
     except:
