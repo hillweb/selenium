@@ -495,15 +495,17 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
     current_url = sb.get_current_url()
     logger.info(f"详情页URL: {mask_url(current_url)}")
     try:
-        expiry_date = sb.execute_script('return document.querySelector("#profile-overview").innerText')
+        sb.wait_for_element_visible("#profile-overview", timeout=10)
+        expiry_date = sb.get_text("#profile-overview")
         exp_date=expiry_date.split('Expiry')[1].split('\n')[1]
         logger.info(f"过期日期：{exp_date}")
         try:
-            sb.execute_script('document.querySelector("button[data-bs-target=\"#renew-modal\"]").click()')
-            sb.wait_for_element_visible('div.modal-footer>button[type=submit]', timeout=5)
-            sb.execute_script('document.querySelector("div.modal-footer>button[type=submit]").click()')
+            sb.click('button[data-bs-target="#renew-modal"]')
+            sb.wait_for_element_visible('div.modal-footer > button[type="submit"]', timeout=5)
+            sb.click('div.modal-footer > button[type="submit"]')
             sb.wait_for_element_visible('#profile-overview', timeout=15)
-            expiry_date = sb.execute_script('return document.querySelector("#profile-overview").innerText')
+            sb.wait_for_element_visible("#profile-overview", timeout=10)
+            expiry_date = sb.get_text("#profile-overview")
             exp_date=expiry_date.split('Expiry')[1].split('\n')[1]
             logger.info(f"过期日期：{exp_date}")
         except  Exception as e:
