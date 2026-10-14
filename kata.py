@@ -504,7 +504,6 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
             sb.wait_for_element_visible('div.modal-footer > button[type="submit"]', timeout=5)
             sb.click('div.modal-footer > button[type="submit"]')
             sb.wait_for_element_visible('#profile-overview', timeout=15)
-            sb.wait_for_element_visible("#profile-overview", timeout=10)
             expiry_date = sb.get_text("#profile-overview")
             exp_date=expiry_date.split('Expiry')[1].split('\n')[1]
             logger.info(f"过期日期：{exp_date}")
