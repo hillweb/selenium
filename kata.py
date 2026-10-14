@@ -618,12 +618,12 @@ def main():
     try:
         result = betadash_login(email, password, proxy, max_retries=1)
 
-        notify_telegram(
-            email=email,
-            ok=result["success"],
-            msg=result["message"],
-            screenshot_file=result["screenshot"],
-        )
+        # notify_telegram(
+        #     email=email,
+        #     ok=result["success"],
+        #     msg=result["message"],
+        #     screenshot_file=result["screenshot"],
+        # )
 
         if result["success"]:
             logger.info("✅ 保活流程完成")
