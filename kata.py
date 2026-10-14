@@ -496,15 +496,18 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
     logger.info(f"详情页URL: {mask_url(current_url)}")
     try:
         expiry_date = sb.execute_script('return document.querySelector("#profile-overview").innerText')
-        exp_date=expiry_date.split('Expiry')[1].split('\n')[1];
-        logger.info(f"过期日期：{exp_date}");
-        sb.execute_script('document.querySelector("button[data-bs-target=\"#renew-modal\"]").click()');
-        time.sleep(3);
-        sb.execute_script('document.querySelector("div.modal-footer>button[type=submit]").click()');
-        time.sleep(15);
-        expiry_date = sb.execute_script('return document.querySelector("#profile-overview").innerText')
-        exp_date=expiry_date.split('Expiry')[1].split('\n')[1];
-        logger.info(f"过期日期：{exp_date}");
+        exp_date=expiry_date.split('Expiry')[1].split('\n')[1]
+        logger.info(f"过期日期：{exp_date}")
+        try:
+            sb.execute_script('document.querySelector("button[data-bs-target=#renew-modal]").click()')
+            sb.wait_for_element_visible('div.modal-footer>button[type=submit]', timeout=5)
+            sb.execute_script('document.querySelector("div.modal-footer>button[type=submit]").click()')
+            sb.wait_for_element_visible('#profile-overview', timeout=15)
+            expiry_date = sb.execute_script('return document.querySelector("#profile-overview").innerText')
+            exp_date=expiry_date.split('Expiry')[1].split('\n')[1]
+            logger.info(f"过期日期：{exp_date}")
+        except:
+            logger.error('无法点击更新按钮')
     except:
         logger.error("无法获取过期日期.")
     sp_detail = screenshot_path("08-server-detail")
