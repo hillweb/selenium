@@ -506,8 +506,8 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
             expiry_date = sb.execute_script('return document.querySelector("#profile-overview").innerText')
             exp_date=expiry_date.split('Expiry')[1].split('\n')[1]
             logger.info(f"过期日期：{exp_date}")
-        except:
-            logger.error('无法点击更新按钮')
+        except  Exception as e:
+            logger.error(f'无法点击更新按钮.\n{e}')
     except:
         logger.error("无法获取过期日期.")
     sp_detail = screenshot_path("08-server-detail")
