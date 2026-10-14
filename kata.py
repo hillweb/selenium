@@ -499,7 +499,7 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
         exp_date=expiry_date.split('Expiry')[1].split('\n')[1]
         logger.info(f"过期日期：{exp_date}")
         try:
-            sb.execute_script('document.querySelector("button[data-bs-target=#renew-modal]").click()')
+            sb.execute_script('document.querySelector("button[data-bs-target=\"#renew-modal\"]").click()')
             sb.wait_for_element_visible('div.modal-footer>button[type=submit]', timeout=5)
             sb.execute_script('document.querySelector("div.modal-footer>button[type=submit]").click()')
             sb.wait_for_element_visible('#profile-overview', timeout=15)
