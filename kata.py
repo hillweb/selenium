@@ -500,22 +500,28 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
         expiry_date = sb.get_text("#profile-overview")
         exp_date=expiry_date.split('Expiry')[1].split('\n')[1]
         logger.info(f"过期日期：{exp_date}")
-        try:
-            logger.info("点击 Renew 按钮.")
-            sb.click('button[data-bs-target="#renew-modal"]')
-            sb.wait_for_element_visible('div.modal-footer > button[type="submit"]', timeout=5)
-            sb.click('div.modal-footer > button[type="submit"]')
-            logger.info("正在更新...")
-            sb.sleep(10)
-            sb.wait_for_element_visible('#profile-overview', timeout=15)
-            expiry_date2 = sb.get_text("#profile-overview")
-            exp_date2=expiry_date.split('Expiry')[1].split('\n')[1]
-            if exp_date2 == exp_date:
-                logger.info(f"未更新！")
-            else:
-                logger.info(f"✅成功更新日期：{exp_date2}")
-        except  Exception as e:
-            logger.error(f'无法点击更新按钮.\n{e}')
+        today=datetime.now().date()
+        delta=datetime.strptime(exp_date,'%Y-%m-%d').date()-today
+        delta_days=delta.days
+        if delta_days>1 :
+            try:
+                logger.info("点击 Renew 按钮.")
+                sb.click('button[data-bs-target="#renew-modal"]')
+                sb.wait_for_element_visible('div.modal-footer > button[type="submit"]', timeout=5)
+                sb.click('div.modal-footer > button[type="submit"]')
+                logger.info("正在更新...")
+                sb.sleep(10)
+                sb.wait_for_element_visible('#profile-overview', timeout=15)
+                expiry_date2 = sb.get_text("#profile-overview")
+                exp_date2=expiry_date.split('Expiry')[1].split('\n')[1]
+                if exp_date2 == exp_date:
+                    logger.info(f"未更新！")
+                else:
+                    logger.info(f"✅成功更新日期：{exp_date2}")
+            except  Exception as e:
+                logger.error(f'无法点击更新按钮.\n{e}')
+        else:
+            logger.info(f'距更新日期还有{delta_days}天，无需更新！')
     except:
         logger.error("无法获取过期日期.")
     sp_detail = screenshot_path("08-server-detail")
