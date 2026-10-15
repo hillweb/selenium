@@ -503,7 +503,7 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
         today=datetime.now().date()
         delta=datetime.strptime(exp_date,'%Y-%m-%d').date()-today
         delta_days=delta.days
-        if delta_days>1 :
+        if delta_days < 2 :
             try:
                 logger.info("点击 Renew 按钮.")
                 sb.click('button[data-bs-target="#renew-modal"]')
