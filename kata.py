@@ -135,7 +135,7 @@ def parse_single_account() -> tuple[str, str]:
         idx=int(int(time.time())/86400)%len(parts)
         if parts[idx]:
             email=parts[idx]
-            logger.info(f"读取到账号: {mask_email(email)}")
+            logger.info(f"读取到账号:{idx}: {mask_email(email)}")
             return email, password
         else:
             logger.error("ACCOUNTS 中邮箱或密码为空")
