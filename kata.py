@@ -131,7 +131,7 @@ def parse_single_account() -> tuple[str, str]:
         sys.exit(1)
 
     try:
-        parts=accounts.split(',')
+        parts=accounts.split(',')[::-1]
         idx=int(int(time.time())/86400)%len(parts)
         if parts[idx]:
             email=parts[idx]
