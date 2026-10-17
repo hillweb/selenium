@@ -506,12 +506,9 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
         if delta_days < 2 :
             try:
                 logger.info("点击 Renew 按钮.")
-                sb.click('button[data-bs-target="#renew-modal"]')
-                sb.wait_for_element_visible('div.modal-footer > button[type="submit"]', timeout=5)
-                sb.click('div.modal-footer > button[type="submit"]')
+                sb.click('#renew-modal button[type=submit]')
                 logger.info("正在更新...")
-                sb.sleep(10)
-                sb.wait_for_element_visible('#profile-overview', timeout=15)
+                sb.wait_for_element_visible('#main>.alert', timeout=30)
                 expiry_date2 = sb.get_text("#profile-overview")
                 exp_date2=expiry_date.split('Expiry')[1].split('\n')[1]
                 logger.info(f"✅成功更新日期：{exp_date2}")
