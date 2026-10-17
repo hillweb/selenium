@@ -506,7 +506,7 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
         if delta_days < 2 :
             try:
                 logger.info("点击 Renew 按钮.")
-                sb.click('#renew-modal button[type=submit]')
+                sb.js_click('#renew-modal button[type=submit]')
                 logger.info("正在更新...")
                 sb.wait_for_element_visible('#main>.alert', timeout=30)
                 expiry_date2 = sb.get_text("#profile-overview")
