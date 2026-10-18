@@ -26,7 +26,7 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S"
 )
-logger = logging.getLogger("lunes-keep")
+logger = logging.getLogger("Kata-keep")
 
 
 # ================== 辅助函数 ==================
@@ -98,7 +98,7 @@ def notify_telegram(email: str, ok: bool, msg: str = "", screenshot_file: str = 
             return
 
         status = "✅ 保活成功" if ok else "❌ 保活失败"
-        message=f"Lunes账号: {email}\n{status}. From: github-hill"
+        message=f"Kata 账号: {email}\n{status}. From: github-hill"
         requests.post(tg_api, data=message.encode('utf-8'))
     except Exception as e:
         logger.warning(f"Telegram 通知失败: {e}")
