@@ -618,20 +618,27 @@ def betadash_login(
 
 
 # ================== 主程序 ==================
-def main(idx):
-    email, password = parse_single_account(idx)
+def main():
     proxy = os.environ.get("PROXY_SERVER")
     display = setup_display()
     try:
+        email, password = parse_single_account(0)
         result = betadash_login(email, password, proxy, max_retries=1)
-
-        # notify_telegram(
-        #     email=email,
-        #     ok=result["success"],
-        #     msg=result["message"],
-        #     screenshot_file=result["screenshot"],
-        # )
-
+        notify_telegram(
+            email=email,
+            ok=result["success"],
+            msg=result["message"],
+            screenshot_file=result["screenshot"],
+        )
+        email, password = parse_single_account(1)
+        result = betadash_login(email, password, proxy, max_retries=1)
+        notify_telegram(
+            email=email,
+            ok=result["success"],
+            msg=result["message"],
+            screenshot_file=result["screenshot"],
+        )
+        
         if result["success"]:
             logger.info("✅ 保活流程完成")
             sys.exit(0)
@@ -644,6 +651,4 @@ def main(idx):
             display.stop()
 
 if __name__ == "__main__":
-    main(0)
-    time.sleep(5)
-    main(1)
+    main()
