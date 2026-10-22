@@ -91,7 +91,7 @@ def safe_screenshot(sb, path: str):
 
 
 def notify_telegram(email: str, ok: bool, msg: str = "", screenshot_file: str = None):
-    return
+    # return
     try:
         tg_api = os.environ.get("TG_API")
         if not tg_api:
