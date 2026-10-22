@@ -645,3 +645,5 @@ def main(idx):
 
 if __name__ == "__main__":
     main(0)
+    time.sleep(5)
+    main(1)
