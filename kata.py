@@ -511,8 +511,8 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
             try:
                 logger.info("点击 Renew 按钮.")
                 sb.click("[data-bs-target=#renew-modal]")
-                sb.wait_for_element_visible('div#renew-modal', timeout=30)
-                sb.click('#renew-modal button[type=submit]')
+                sb.sleep(10)
+                sb.js_click('#renew-modal button[type=submit]')
                 logger.info("正在更新...")
                 sb.wait_for_element_visible('#main>.alert', timeout=30)
                 sb.uc_open_with_reconnect(current_url, reconnect_time=8)
