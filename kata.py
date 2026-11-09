@@ -518,6 +518,7 @@ def navigate_to_server(sb, email: str) -> tuple[bool, str, Optional[str]]:
                 sb.wait_for_element_visible('#main>.alert', timeout=30)
                 sb.uc_open_with_reconnect(current_url, reconnect_time=8)
                 time.sleep(10)
+                check_and_exit_on_rate_limit(sb, email)
                 sb.wait_for_element_visible("#profile-overview", timeout=10)
                 expiry_date2 = datetime.strptime(exp_date,'%Y-%m-%d')+timedelta(days=4)
                 exp_date2=expiry_date2.strftime('%Y-%m-%d')
