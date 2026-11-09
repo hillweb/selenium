@@ -69,7 +69,7 @@ jobs:
           current_d=$(date -u +%s)
           cron_d=$(date -u -d "$(cat upload/kata_renew.txt) -1 day"  +"%-d %-m")
           if ((expire_d<current_d));then echo '* *' ;fi
-          CRON="3 3 $cron_d *"
+          CRON="3 10 $cron_d *"
           echo "cron=$CRON" >>$GITHUB_OUTPUT
       - name: Update cron schedule
         uses: gr2m/set-cron-schedule-action@v2
