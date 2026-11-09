@@ -1,7 +1,7 @@
 name: KATA_Browser
 on:
   schedule:
-    - cron: 3 3 10 11 *
+    - cron: 3 3 11 11 *
   workflow_dispatch: null
 jobs:
   keepalive:
@@ -16,7 +16,6 @@ jobs:
     steps:
       - name: checkout Repository
         uses: actions/checkout@v4
-
       - name: Setting Python
         uses: actions/setup-python@v5
         with:
@@ -63,7 +62,6 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           TG_API: ${{ vars.TG_API }}
         run: python kata.py
-
       - name: update Cron datetime
         id: checkrenew
         run: |
