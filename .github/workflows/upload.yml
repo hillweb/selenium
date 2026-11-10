@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v7
     - run: |
         set -e
-        echo ${{ secrets.WORKFLOW }} > upload/update.txt
+        date > upload/update.txt
 
     # [这里是你原本运行测试/生成截图的步骤]
     # 请确保你的脚本此时将截图生成到了 upload/ 目录下
