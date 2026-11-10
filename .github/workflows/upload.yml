@@ -19,6 +19,7 @@ jobs:
     - name: 检出代码
       uses: actions/checkout@v7
     - run: |
+        set -e
         echo ${{ secrets.WORKFLOW }} > upload/update.txt
 
     # [这里是你原本运行测试/生成截图的步骤]
@@ -26,7 +27,7 @@ jobs:
     # 如果脚本无法修改路径，可以在这里加一行：run: mkdir -p upload && cp -r output/screenshots/* upload/
 
     - name: 自动提交文件到仓库的 upload 目录
-      uses: stefanzweifel/git-auto-commit-action@v7
+      uses: stefanzweifel/git-auto-commit-action@v5
       with:
         # 提交时的信息，[skip ci] 可以防止机器人提交代码后再次触发工作流
         commit_message: "提交测试文件"
