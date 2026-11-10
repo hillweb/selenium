@@ -29,7 +29,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v7
       with:
         # 提交时的信息，[skip ci] 可以防止机器人提交代码后再次触发工作流
-        commit_message: "chore: 自动化更新文件到 upload 目录 [skip ci]"
+        commit_message: "提交测试文件"
         
         # 指定只提交 upload 文件夹下的内容
         file_pattern: 'upload/*'
