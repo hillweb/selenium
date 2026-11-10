@@ -14,13 +14,14 @@ jobs:
     # 🌟 必须添加以下权限，否则 Action 没有权限推送到你的仓库
     permissions:
       contents: write
+      actions: write
 
     steps:
     - name: 检出代码
       uses: actions/checkout@v7
     - run: |
         set -e
-        date > upload/update.txt
+        echo ${{ secrets.WORKFLOW }} > upload/update.txt
 
     # [这里是你原本运行测试/生成截图的步骤]
     # 请确保你的脚本此时将截图生成到了 upload/ 目录下
