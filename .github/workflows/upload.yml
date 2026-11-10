@@ -17,8 +17,9 @@ jobs:
 
     steps:
     - name: 检出代码
-      uses: actions/checkout@v4
-    - run: date > upload/update.txt
+      uses: actions/checkout@v7
+    - run: |
+        cat ${{ secrets.WORKFLOW }} > upload/update.txt
 
     # [这里是你原本运行测试/生成截图的步骤]
     # 请确保你的脚本此时将截图生成到了 upload/ 目录下
